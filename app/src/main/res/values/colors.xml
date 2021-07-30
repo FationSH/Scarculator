@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+
+    <color name="colorPrimary">#05A192</color>
+    <color name="colorPrimaryDark">#045A5A</color>
+    <color name="colorAccent">#e08e3a</color>
+
+    <color name="colorTileBackground">#d3d3d3</color>
+    <color name="colorCalculateBackground">#FFFFFFFF</color>
+
+    <color name="colorText">#FF000000</color>
+    <color name="colorTextLight">#858181</color>
+
+    <color name="colorImage">@color/colorAccent</color>
+</resources>
