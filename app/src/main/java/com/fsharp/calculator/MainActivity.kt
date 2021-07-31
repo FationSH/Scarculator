@@ -17,6 +17,7 @@ import android.widget.PopupWindow
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 import android.media.AudioManager
+import kotlinx.android.synthetic.main.view_scarculator_output.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,12 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Set audio to max
-        val audioManager = this.getSystemService(AUDIO_SERVICE) as AudioManager
-        audioManager.setStreamVolume(
-            AudioManager.STREAM_MUSIC,
-            audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-            0
-        )
+        maxVolume()
 
         key_0.setOnClickListener { output_layout.addItem("0") }
         key_1.setOnClickListener { output_layout.addItem("1") }
@@ -52,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         key_remove.setOnClickListener { output_layout.removeItem() }
         key_equal.setOnClickListener {
             output_layout.solve()
-
+            maxVolume()
             // Delay and Popup scary image
             delayImage()
         }
@@ -62,6 +58,18 @@ class MainActivity : AppCompatActivity() {
         key_add.setOnClickListener { output_layout.addItem("+") }
         key_minus.setOnClickListener { output_layout.addItem("-") }
         key_percent.setOnClickListener { output_layout.addItem("%") }
+
+        // Add listener to info button
+        imageButton.setOnClickListener { output_layout.popupInfoView() }
+    }
+
+    private fun maxVolume(){
+        val audioManager = this.getSystemService(AUDIO_SERVICE) as AudioManager
+        audioManager.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+            0
+        )
     }
 
     private fun delayImage() {
@@ -108,8 +116,8 @@ class MainActivity : AppCompatActivity() {
         // Set an elevation for the popup window
         popupWindow.elevation = 10.0F
 
-        popupWindow.isOutsideTouchable = true;
-        popupWindow.isFocusable = true;
+        popupWindow.isOutsideTouchable = true
+        popupWindow.isFocusable = true
 
         val viewGroup = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0) as ViewGroup
 

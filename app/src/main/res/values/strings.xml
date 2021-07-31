@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Scarculator</string>
+    <string name="boo">BOO</string>
+    <string name="about_txt">Learn more about the developer</string>
+    <string name="visit_page">Visit my page</string>
 
 
 </resources>

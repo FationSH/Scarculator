@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/roundedbutton"
+    android:padding="28dp" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorCalculateBackground"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/sizeAbout"
+        android:text="@string/about_txt" />
+
+    <TextView
+        android:id="@+id/link_to_myport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorCalculateBackground"
+        android:background="?selectableItemBackground"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:padding="12dp"
+        android:textSize="@dimen/sizeLink"
+        android:text="@string/visit_page" />
+
+</LinearLayout>

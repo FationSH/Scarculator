@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:gravity="center_vertical"
     tools:parentTag="android.widget.LinearLayout"
     tools:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/roundedbutton"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
 
     <TextView
         android:id="@+id/calculator_input_equation"

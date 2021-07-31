@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorCalculateBackground"
         android:layout_gravity="center_horizontal"
-        android:text="BOO" />
+        android:text="@string/boo" />
 
     <ImageView
         android:id="@+id/image"
