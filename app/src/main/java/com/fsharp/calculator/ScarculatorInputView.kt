@@ -12,7 +12,7 @@ class ScarculatorInputView(context: Context, attributeSet: AttributeSet?) : Rela
 
     init {
         // Inflate Layout
-        val view = LayoutInflater.from(context).inflate(R.layout.view_scarculator_input, this, true)
+        LayoutInflater.from(context).inflate(R.layout.view_scarculator_input, this, true)
 
         // Read attribute set
         attributeSet?.run {
