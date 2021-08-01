@@ -3,9 +3,6 @@ package com.fsharp.calculator
 import android.content.Context
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.transition.TransitionManager
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -17,16 +14,25 @@ import android.widget.PopupWindow
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 import android.media.AudioManager
+import android.os.*
+//import com.google.android.gms.ads.AdRequest
+//import com.google.android.gms.ads.AdSize
+//import com.google.android.gms.ads.AdView
+//import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.view_scarculator_output.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val images = arrayOf("scary_one", "scary_two", "scary_three", "scary_four")
+    private val images = arrayOf("scary_one", "scary_two", "scary_three", "scary_four", "scary_five", "scary_six")
     private lateinit var popupWindow: PopupWindow
+    // lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Init ad banner
+        // adBanner()
 
         // Set audio to max
         maxVolume()
@@ -48,7 +54,9 @@ class MainActivity : AppCompatActivity() {
         key_remove.setOnClickListener { output_layout.removeItem() }
         key_equal.setOnClickListener {
             output_layout.solve()
+            // Set phone volume to MAX
             maxVolume()
+
             // Delay and Popup scary image
             delayImage()
         }
@@ -72,6 +80,25 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private fun vibratePhone() {
+        val v = (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
+
+        if (v.hasVibrator()) {
+            val pattern = longArrayOf(0, 100, 100)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(
+                    VibrationEffect.createOneShot(
+                        1900,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                )
+            } else {
+                v.vibrate(pattern, -1)
+            }
+        }
+    }
+
     private fun delayImage() {
         val mediaPlayer: MediaPlayer = MediaPlayer.create(applicationContext, R.raw.scary_sound)
         val initDelay = Random.nextLong(200, 600)
@@ -85,8 +112,11 @@ class MainActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             this@MainActivity.runOnUiThread {
                 popupScaryImage()
+
+                // Vibrate Phone
+                vibratePhone()
             }
-        }, initDelay+100)
+        }, initDelay+80)
 
         Handler(Looper.getMainLooper()).postDelayed({
             this@MainActivity.runOnUiThread {
@@ -104,7 +134,7 @@ class MainActivity : AppCompatActivity() {
         val view = inflater.inflate(R.layout.view_scary_image, null)
 
         val image = view.findViewById<ImageView>(R.id.image)
-        image.setImageResource(resources.getIdentifier(images[Random.nextInt(0, 3)],"drawable", packageName))
+        image.setImageResource(resources.getIdentifier(images[Random.nextInt(0, 6)],"drawable", packageName))
 
         // Initialize a new instance of popup window
         popupWindow = PopupWindow(
@@ -131,5 +161,19 @@ class MainActivity : AppCompatActivity() {
         )
 
     }
+
+//    private fun adBanner() {
+//        // mAdView = AdView(this)
+//        mAdView = findViewById(R.id.adView)
+////        mAdView.adSize = AdSize.BANNER
+////        mAdView.adUnitId = "ca-app-pub-3940256099942544~3347511713"
+//
+//        MobileAds.initialize(this) {}
+//
+//
+//        val adRequest = AdRequest.Builder().build()
+//        mAdView.loadAd(adRequest)
+//
+//    }
 
 }
