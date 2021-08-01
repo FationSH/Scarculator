@@ -15,24 +15,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 import android.media.AudioManager
 import android.os.*
-//import com.google.android.gms.ads.AdRequest
-//import com.google.android.gms.ads.AdSize
-//import com.google.android.gms.ads.AdView
-//import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.view_scarculator_output.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val images = arrayOf("scary_one", "scary_two", "scary_three", "scary_four", "scary_five", "scary_six")
+    private val images = arrayOf("scary_one", "scary_two", "scary_three", "scary_four")
     private lateinit var popupWindow: PopupWindow
-    // lateinit var mAdView : AdView
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Init ad banner
-        // adBanner()
+        adBanner()
 
         // Set audio to max
         maxVolume()
@@ -134,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         val view = inflater.inflate(R.layout.view_scary_image, null)
 
         val image = view.findViewById<ImageView>(R.id.image)
-        image.setImageResource(resources.getIdentifier(images[Random.nextInt(0, 6)],"drawable", packageName))
+        image.setImageResource(resources.getIdentifier(images[Random.nextInt(0, 4)],"drawable", packageName))
 
         // Initialize a new instance of popup window
         popupWindow = PopupWindow(
@@ -162,18 +161,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    private fun adBanner() {
-//        // mAdView = AdView(this)
-//        mAdView = findViewById(R.id.adView)
-////        mAdView.adSize = AdSize.BANNER
-////        mAdView.adUnitId = "ca-app-pub-3940256099942544~3347511713"
-//
-//        MobileAds.initialize(this) {}
-//
-//
-//        val adRequest = AdRequest.Builder().build()
-//        mAdView.loadAd(adRequest)
-//
-//    }
+    private fun adBanner() {
+        // mAdView = AdView(this)
+        mAdView = findViewById(R.id.adView)
+//        mAdView.adSize = AdSize.BANNER
+//        mAdView.adUnitId = "ca-app-pub-3940256099942544~3347511713"
+
+        MobileAds.initialize(this) {}
+
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+    }
 
 }
